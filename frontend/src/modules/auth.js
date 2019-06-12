@@ -45,8 +45,8 @@ export default {
                 // eslint-disable-next-line no-undef
                 app.$auth.post('/oauth/token', user)
                     .then(response => {
-                        const token = response.data.result.token.access_token
-                        const me = JSON.stringify(response.data.result.user)
+                        const token = response.data.access_token
+                        const me = JSON.stringify(response.data.user)
 
                         localStorage.setItem('token', token)
                         localStorage.setItem('me', me)

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from "./store";
 
 Vue.use(Router)
 
@@ -45,8 +46,16 @@ let router = new Router({
 			]
 		},
 		{
+			path: '/login',
+			name: 'login',
+			component: () => import('./views/Login.vue'),
+		},
+		{
 			path: '/dashboard',
 			component: () => import('./views/dashboard/Index.vue'),
+			meta: {
+				requiresAuth: true
+			},
 			children: [
 				{
 					path: '',
@@ -57,5 +66,17 @@ let router = new Router({
 		}
 	]
 })
+
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(record => record.meta.requiresAuth)) {
+		if (store.getters["auth/isLoggedIn"]) {
+			next();
+			return;
+		}
+		next({name: 'login'});
+	} else {
+		next();
+	}
+});
 
 export default router;
