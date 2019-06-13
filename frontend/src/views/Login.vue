@@ -34,12 +34,6 @@
 									data-vv-name="password"
 									:error-messages="errors.collect('password')"
 								></v-text-field>
-								<v-checkbox
-									v-model="checkbox"
-									:error-messages="checkboxErrors"
-									label="Remember me"
-									required
-								></v-checkbox>
 								<v-btn
 									type="submit"
 									round
@@ -70,11 +64,11 @@
 				checkbox: false,
 				checkboxErrors: null,
 				item: {
-					grant_type: "password",
-					client_id: 2,
-                    client_secret: "FSo2rYdC6ffcbKBTsLTnONgAXqwqo73A8HmKjYMm",
-                    email: 'administrator@mail.com',
-                    password: 'secret'
+					grant_type: process.env.VUE_APP_GRANT_TYPE,
+					client_id: process.env.VUE_APP_CLIENT_ID,
+					client_secret: process.env.VUE_APP_CLIENT_SECRET,
+					email: process.env.VUE_APP_DEFAULT_ADMIN_EMAIL,
+					password: process.env.VUE_APP_DEFAULT_ADMIN_PASSWORD
 				}
 			};
 		},
@@ -86,20 +80,12 @@
 				this.$store
 					.dispatch("auth/login", this.item)
 					.then(response => {
-						if (response.data.status == "success") {
-							this.$router.push("/");
-							this.$toast.info("login success...");
-						} else {
-							vm.error = true;
-							vm.message = response.data.message;
-							this.$toast.error("login failed.ssss.");
-						}
+						this.$router.push({ name: "dashboard" });
 						this.loading = false;
 					})
 					.catch(err => {
 						vm.error = true;
 						vm.message = err.response.data.message;
-						this.$toast.error("login failed..");
 						this.loading = false;
 					});
 			}

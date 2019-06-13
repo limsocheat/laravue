@@ -46,22 +46,22 @@ export default {
                 app.$auth.post('/oauth/token', user)
                     .then(response => {
                         const token = response.data.access_token
-                        const me = JSON.stringify(response.data.user)
+                        // const me = JSON.stringify(response.data.user)
 
                         localStorage.setItem('token', token)
-                        localStorage.setItem('me', me)
+                        // localStorage.setItem('me', me)
 
                         // eslint-disable-next-line no-undef
                         app.$auth.defaults.headers.common['Authorization'] = "Bearer " + token
 
                         commit('auth_success', token)
-                        commit('set_me', me)
+                        // commit('set_me', me)
                         resolve(response)
                     })
                     .catch(err => {
                         commit('auth_error')
                         localStorage.removeItem('token')
-                        localStorage.removeItem('me')
+                        // localStorage.removeItem('me')
                         reject(err)
                     })
             })

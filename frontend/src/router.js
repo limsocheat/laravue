@@ -47,7 +47,7 @@ let router = new Router({
 		},
 		{
 			path: '/login',
-			name: 'login',
+			name: 'auth.login',
 			component: () => import('./views/Login.vue'),
 		},
 		{
@@ -61,7 +61,28 @@ let router = new Router({
 					path: '',
 					name: 'dashboard',
 					component: () => import('./views/dashboard/Dashboard.vue'),
-				}
+				},
+				{
+					path: 'page',
+					name: 'dashboard.page',
+					component: () => import('./views/dashboard/pages/Index.vue'),
+				},
+				{
+					path: 'profile',
+					component: () => import('./views/dashboard/tools/profile/Index.vue'),
+					children: [
+						{
+							path: '',
+							name: 'dashboard.profile',
+							component: () => import('./views/dashboard/tools/profile/Profile.vue'),
+						},
+						{
+							path: 'password',
+							name: 'dashboard.profile.password',
+							component: () => import('./views/dashboard/tools/profile/Password.vue'),
+						},
+					]
+				},
 			]
 		}
 	]
@@ -73,7 +94,7 @@ router.beforeEach((to, from, next) => {
 			next();
 			return;
 		}
-		next({name: 'login'});
+		next({name: 'auth.login'});
 	} else {
 		next();
 	}
