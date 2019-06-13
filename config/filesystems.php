@@ -64,6 +64,11 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'driveD' => [
+            'driver' => 'local',
+            'root' => 'D:\\backuplaravel',
+        ],
+
     ],
 
 ];

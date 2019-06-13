@@ -9,6 +9,7 @@
 				<v-menu open-on-hover offset-y v-for="(menu, index) in menus" :key="index">
 					<template v-slot:activator="{ on }">
 						<v-btn flat :to="{ name: menu.link }" v-on="on">
+							<v-icon left v-show="menu.icon">{{ menu.icon }}</v-icon>
 							{{ menu.title }}
 							<v-icon v-show="menu.children">arrow_drop_down</v-icon>
 						</v-btn>
@@ -74,7 +75,8 @@
 				menus: [
 					{
 						title: "About",
-						link: "about"
+						link: "about",
+						icon: "home"
 					},
 					{
 						title: "Services",

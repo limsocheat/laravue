@@ -76,6 +76,10 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
+            'dump' => [
+                'dump_binary_path' => 'C:\\wamp64\\bin\\mysql\\mysql5.7.23\\bin', // only the path, so without `mysqldump` or `pg_dump`
+            ]  
+
         ],
 
         'sqlsrv' => [
