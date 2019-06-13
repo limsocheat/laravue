@@ -89,13 +89,6 @@
 						description:
 							"Manage your notification campaigns and send messages to reach the right users at the right time",
 						color: "blue"
-					},
-					{
-						id: "4",
-						title: "Authentification",
-						description:
-							"Authenticate and manage users from a variety of providers without server-side-code",
-						color: "purple"
 					}
 				]
 			};
